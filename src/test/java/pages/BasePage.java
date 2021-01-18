@@ -3,6 +3,7 @@ package pages;
 import appium.AppiumConfig;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.aeonbits.owner.ConfigFactory;
@@ -24,9 +25,6 @@ public class BasePage<T extends AppiumDriver> {
 
     private final T driver;
     private AppiumConfig config = ConfigFactory.create(AppiumConfig.class);
-
-    protected final String ID_PREFIX = "com.pixelart.odl:id/";
-    protected final String ID_PREFIX_INI  = "android:id/";
 
     public BasePage(AppiumDriver<?> pDriver) {
         this.driver = (T) pDriver;
@@ -81,7 +79,9 @@ public class BasePage<T extends AppiumDriver> {
 
     //evaluar si necesito este metodo
     public AndroidElement getAndroidElementByText(String text) {
+    //public void getAndroidElementByText(String text) {
         String uiAutomatorText = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+text+"\").instance(0))";
+        //String uiAutomatorText = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).getChildByText())"
         return (AndroidElement) getDriver().findElement(AndroidUIAutomator(uiAutomatorText));
     }
 }

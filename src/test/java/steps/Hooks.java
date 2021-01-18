@@ -9,6 +9,7 @@ import io.appium.java_client.AppiumDriver;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.xalan.xsltc.dom.AdaptiveResultTreeImpl;
 
 public class Hooks {
     private static final Logger log = LogManager.getLogger(Hooks.class);
@@ -24,6 +25,7 @@ public class Hooks {
 
     @After
     public void tearDown(Scenario scenario) throws Exception {
+        Context.driver.closeApp();
         log.info("In After tests.......");
     }
 }

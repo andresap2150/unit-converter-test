@@ -15,12 +15,20 @@ public class HomePageSteps {
 
     private AppiumDriver<MobileElement> wd;
     private static final Logger log = LogManager.getLogger(HomePageSteps.class);
+    private LandingPage landing;
 
     @When("^I open the menu$")
     public void iLaunchQuikrApp() throws Throwable {
-        LandingPage landing = new LandingPage(Context.driver);
+        landing = new LandingPage(Context.driver);
         landing.clickOpenMenu();
         log.info("in the first step!!!");
         landing.clickArea();
+    }
+
+    @When("^I set (\\d+) hectareas to squaredkilometers$")
+    public void i_set_hectareas_to_squaredkilometers(int initialValue) throws Throwable {
+        landing.clicToUnits();
+        landing.setKilometers();
+        landing.setInitialValue(initialValue);
     }
 }

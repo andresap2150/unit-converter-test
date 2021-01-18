@@ -1,9 +1,7 @@
-  Feature: Hello World
+  Feature: First flow (dimension convert)
 
-  Scenario: Registration Flow Validation via App
-  As a user I should be able to see my google account
-  when I try to register myself in Quikr
+  Scenario: Flow Validation convert an area from hectareas to squared km
 
     When I open the menu
-    #And I choose to log in using Google
+    And I set 250 hectareas to squaredkilometers
     # Then I see account picker screen with my email address "testemail@gmail.com"
