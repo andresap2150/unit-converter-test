@@ -10,6 +10,8 @@ import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.xalan.xsltc.dom.AdaptiveResultTreeImpl;
+import org.assertj.core.api.SoftAssertionError;
+import org.assertj.core.api.SoftAssertions;
 
 public class Hooks {
     private static final Logger log = LogManager.getLogger(Hooks.class);
@@ -20,11 +22,14 @@ public class Hooks {
         SimpleMobileFactory mf = new SimpleMobileFactory();
         AppiumDriver<?> driver = mf.getDriver(config);
         Context.driver = driver;
+        Context.softAssertions = new SoftAssertions();
         log.info("Driver successfully started");
     }
 
     @After
     public void tearDown(Scenario scenario) throws Exception {
+        Context.softAssertions.assertAll();
+
         Context.driver.closeApp();
         log.info("In After tests.......");
     }

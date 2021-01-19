@@ -2,6 +2,7 @@ package steps;
 
 import appium.AppiumConfig;
 import appium.SimpleMobileFactory;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -30,5 +31,11 @@ public class HomePageSteps {
         landing.clicToUnits();
         landing.setKilometers();
         landing.setInitialValue(initialValue);
+    }
+
+    @Then("^I see the (.+) converted units$")
+    public void i_see_the_converted_units(double converted) throws Throwable {
+        double actualValue = Double.valueOf(landing.readTargetValue());
+        Context.softAssertions.assertThat(actualValue).isEqualTo(converted).withFailMessage("The converted value is not the same as expected");
     }
 }

@@ -19,6 +19,9 @@ public class LandingPage extends BasePage<AppiumDriver>{
     @AndroidFindBy(id = "com.ba.universalconverter:id/to_units_spinner")
     private AndroidElement toUnits;
 
+    @AndroidFindBy(id = "com.ba.universalconverter:id/target_value")
+    private AndroidElement convertedvalue;
+
     private String sqaredKilometersText = "Kil";
 
     public void clickOpenMenu(){
@@ -54,5 +57,9 @@ public class LandingPage extends BasePage<AppiumDriver>{
             getDriver().findElement(By.xpath("//android.widget.LinearLayout[@resource-id=\"com.ba.universalconverter:id/buttons_row_"+actualRow+"\"]/android.widget.Button["+actualDig+"]")).click();
             auxValue = auxValue - (digit*divisor);
         }
+    }
+
+    public String readTargetValue(){
+        return getText(convertedvalue);
     }
 }

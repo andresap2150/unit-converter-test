@@ -4,4 +4,4 @@
 
     When I open the menu
     And I set 250 hectareas to squaredkilometers
-    # Then I see account picker screen with my email address "testemail@gmail.com"
+    Then I see the 2.5 converted units

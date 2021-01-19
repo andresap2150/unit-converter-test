@@ -77,7 +77,6 @@ public class BasePage<T extends AppiumDriver> {
         getDriver().hideKeyboard();
     }
 
-    //evaluar si necesito este metodo
     public AndroidElement getAndroidElementByText(String text) {
     //public void getAndroidElementByText(String text) {
         String uiAutomatorText = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+text+"\").instance(0))";
