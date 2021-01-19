@@ -5,16 +5,10 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 
-public class LandingPage extends BasePage<AppiumDriver>{
-    public LandingPage(AppiumDriver pDriver) {
+public class MainPage extends BasePage<AppiumDriver>{
+    public MainPage(AppiumDriver pDriver) {
         super(pDriver);
     }
-
-    @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Abrir el cajon de navegacion\"]")
-    private AndroidElement openMenu;
-
-    @AndroidFindBy(xpath = "//android.widget.ListView/android.widget.RelativeLayout[5]")
-    private AndroidElement areaConversion;
 
     @AndroidFindBy(id = "com.ba.universalconverter:id/to_units_spinner")
     private AndroidElement toUnits;
@@ -22,17 +16,12 @@ public class LandingPage extends BasePage<AppiumDriver>{
     @AndroidFindBy(id = "com.ba.universalconverter:id/target_value")
     private AndroidElement convertedvalue;
 
+    @AndroidFindBy(id="com.ba.universalconverter:id/img_switch")
+    private AndroidElement switchMagnitudes;
+
     private String sqaredKilometersText = "Kil";
 
-    public void clickOpenMenu(){
-        click(openMenu);
-    }
-
-    public void clickArea(){
-        click(areaConversion);
-    }
-
-    public void clicToUnits(){
+    public void clickToUnits(){
         click(toUnits);
     }
 
@@ -52,8 +41,20 @@ public class LandingPage extends BasePage<AppiumDriver>{
                 auxValue = auxValue - (digit*divisor);
                 continue;
             }
-            String actualRow = String.valueOf(3-(digit/3));
-            String actualDig = String.valueOf(Math.floorMod(digit,3));
+            String actualRow = "";
+            int tempDig = digit/3;
+            if(tempDig ==2){
+                actualRow = String.valueOf(tempDig);
+            }else{
+                actualRow = String.valueOf(3-tempDig);
+            }
+            int tempDigCol = Math.floorMod(digit,3);
+            String actualDig = "";
+            if(tempDigCol == 0){
+                actualDig = String.valueOf(3);
+            }else{
+                actualDig = String.valueOf(tempDigCol);
+            }
             getDriver().findElement(By.xpath("//android.widget.LinearLayout[@resource-id=\"com.ba.universalconverter:id/buttons_row_"+actualRow+"\"]/android.widget.Button["+actualDig+"]")).click();
             auxValue = auxValue - (digit*divisor);
         }
@@ -61,5 +62,9 @@ public class LandingPage extends BasePage<AppiumDriver>{
 
     public String readTargetValue(){
         return getText(convertedvalue);
+    }
+
+    public void clickSwitch(){
+        click(switchMagnitudes);
     }
 }

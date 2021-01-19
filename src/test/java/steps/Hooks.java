@@ -29,7 +29,6 @@ public class Hooks {
     @After
     public void tearDown(Scenario scenario) throws Exception {
         Context.softAssertions.assertAll();
-
         Context.driver.closeApp();
         log.info("In After tests.......");
     }
